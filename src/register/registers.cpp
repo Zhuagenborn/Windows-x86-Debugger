@@ -25,7 +25,7 @@ Registers::Registers(const HANDLE thread, const std::uint32_t context_flags) :
     thread_{ thread } {
     context_.ContextFlags = context_flags;
     if (GetThreadContext(thread, &context_)) {
-        const_cast<CONTEXT&>(original_context_) = context_;
+        original_context_ = context_;
     } else {
         ThrowLastError();
     }

@@ -18,8 +18,8 @@ Thread::Thread(Thread&& thread) noexcept :
     single_stepping_{ thread.single_stepping_ },
     internal_stepping_{ thread.internal_stepping_ },
     internal_step_callback_{ std::move(thread.internal_step_callback_) } {
-    const_cast<HANDLE&>(thread.handle_) = nullptr;
-    const_cast<std::uint32_t&>(thread.id_) = 0;
+    thread.handle_ = nullptr;
+    thread.id_ = 0;
 }
 
 HANDLE Thread::Handle() const noexcept {

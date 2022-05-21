@@ -39,9 +39,8 @@ public:
      * @param entry         The entry address.
      * @param local_base    The memory address of local data.
      */
-    Thread(const HANDLE handle, const std::uint32_t id,
-           const std::uintptr_t entry,
-           const std::uintptr_t local_base) noexcept;
+    Thread(HANDLE handle, std::uint32_t id, std::uintptr_t entry,
+           std::uintptr_t local_base) noexcept;
 
     Thread(Thread&& thread) noexcept;
 
@@ -120,28 +119,28 @@ public:
      * @param type      The hardware breakpoint type.
      * @param size      The hardware breakpoint size.
      */
-    void SetHardwareBreakpoint(const std::uintptr_t address,
-                               const HardwareBreakpointSlot slot,
-                               const HardwareBreakpointType type,
-                               const HardwareBreakpointSize size) const;
+    void SetHardwareBreakpoint(std::uintptr_t address,
+                               HardwareBreakpointSlot slot,
+                               HardwareBreakpointType type,
+                               HardwareBreakpointSize size) const;
 
     /**
      * @brief Delete a hardware breakpoint.
      *
      * @param slot  The hardware breakpoint slot.
      */
-    void DeleteHardwareBreakpoint(const HardwareBreakpointSlot slot) const;
+    void DeleteHardwareBreakpoint(HardwareBreakpointSlot slot) const;
 
 private:
     using StepCallbackList = std::list<StepCallback>;
 
-    const HANDLE handle_;
+    HANDLE handle_;
 
-    const std::uint32_t id_;
+    std::uint32_t id_;
 
-    const std::uintptr_t entry_;
+    std::uintptr_t entry_;
 
-    const std::uintptr_t local_base_;
+    std::uintptr_t local_base_;
 
     //! Whether the thread has set an internal step.
     bool internal_stepping_{ false };

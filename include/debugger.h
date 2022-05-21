@@ -45,17 +45,15 @@ public:
      * @param current_directory The current directory.
      * @param start_suspended   Whether to suspend the process after creation.
      */
-    void Create(const std::wstring_view file_path,
-                const std::wstring_view cmd_line,
-                const std::wstring_view current_directory,
-                const bool start_suspended);
+    void Create(std::wstring_view file_path, std::wstring_view cmd_line,
+                std::wstring_view current_directory, bool start_suspended);
 
     /**
      * @brief Attach to a process to debug.
      *
      * @param process_id    The process ID.
      */
-    void Attach(const std::uint32_t process_id);
+    void Attach(std::uint32_t process_id);
 
     /**
      * Start the debug loop.
@@ -111,24 +109,24 @@ protected:
     virtual void OnRip(const RIP_INFO& details);
 
     //! The callback for unknown events.
-    virtual void OnUnknownEvent(const std::uint32_t event_code);
+    virtual void OnUnknownEvent(std::uint32_t event_code);
 
     /**************** Exception callbacks ****************/
 
     //! The callback for single steps.
     virtual void OnSingleStep(const EXCEPTION_RECORD& record,
-                              const bool first_chance);
+                              bool first_chance);
 
     //! The callback for breakpoint encounters.
     virtual void OnBreakpoint(const EXCEPTION_RECORD& record,
-                              const bool first_chance);
+                              bool first_chance);
 
     //! The callback for memory access violations.
     virtual void OnAccessViolation(const EXCEPTION_RECORD& record,
-                                   const bool first_chance);
+                                   bool first_chance);
 
     //! The callback for hardware breakpoint encounters.
-    virtual void OnHardwareBreakpoint(const std::uintptr_t address);
+    virtual void OnHardwareBreakpoint(std::uintptr_t address);
 
     /*****************************************************/
 
@@ -143,8 +141,8 @@ protected:
      * @param process_id    The process ID.
      * @param thread_id     The thread ID.
      */
-    void SetDebuggedProcessThread(const std::uint32_t process_id,
-                                  const std::uint32_t thread_id) noexcept;
+    void SetDebuggedProcessThread(std::uint32_t process_id,
+                                  std::uint32_t thread_id) noexcept;
 
     /**
      * Reset the debugged process and thread to null.
@@ -181,14 +179,14 @@ protected:
      *
      * @param id    The process ID.
      */
-    bool RemoveProcess(const std::uint32_t id) noexcept;
+    bool RemoveProcess(std::uint32_t id) noexcept;
 
     /**
      * @brief Find a process.
      *
      * @param id    The process ID.
      */
-    OptionalProcess FindProcess(const std::uint32_t id) const noexcept;
+    OptionalProcess FindProcess(std::uint32_t id) const noexcept;
 
 
     //! Whether the debug loop is running.
@@ -233,11 +231,11 @@ private:
     virtual void cbPostDebugEvent(const DEBUG_EVENT& event){};
 
     //! The generic callback for unknown debug events, called before they are internally processed.
-    virtual void cbUnknownEvent(const std::uint32_t event_code){};
+    virtual void cbUnknownEvent(std::uint32_t event_code){};
 
     //! The generic callback for exceptions, called before they are internally processed.
     virtual void cbPreException(const EXCEPTION_RECORD& record,
-                                const bool first_chance){};
+                                bool first_chance){};
 
     //! The callback for create-process events, called after they were internally processed.
     virtual void cbCreateProcess(const CREATE_PROCESS_DEBUG_INFO& details,
@@ -285,5 +283,5 @@ private:
 
     //! The generic callback for unhandled exceptions.
     virtual void cbUnhandledException(const EXCEPTION_RECORD& record,
-                                      const bool first_chance){};
+                                      bool first_chance){};
 };

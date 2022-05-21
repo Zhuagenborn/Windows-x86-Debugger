@@ -27,8 +27,8 @@ Process::Process(Process&& process) noexcept :
     software_breakpoints_{ std::move(software_breakpoints_) },
     hardware_breakpoints_{ std::move(hardware_breakpoints_) },
     hardware_breakpoint_slots_{ std::move(hardware_breakpoint_slots_) } {
-    const_cast<HANDLE&>(process.handle_) = nullptr;
-    const_cast<std::uint32_t&>(process.id_) = 0;
+    process.handle_ = nullptr;
+    process.id_ = 0;
 }
 
 HANDLE Process::Handle() const noexcept {

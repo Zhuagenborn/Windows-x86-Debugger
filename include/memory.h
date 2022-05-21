@@ -19,7 +19,7 @@
 #include <utility>
 
 
-constexpr std::size_t MemoryPageSize = 0x1000;
+constexpr std::size_t memory_page_size = 0x1000;
 
 enum class MemoryType {
     Access = 0B0001,
@@ -42,9 +42,9 @@ constexpr bool operator<(const MemoryRange& range1,
 /**
  * Remove the write permission from memory protection.
  */
-std::uint32_t RemoveWriteAccess(const std::uint32_t access);
+std::uint32_t RemoveWriteAccess(std::uint32_t access);
 
 /**
  * Remove the execute permission from memory protection.
  */
-std::uint32_t RemoveExecuteAccess(const std::uint32_t access);
+std::uint32_t RemoveExecuteAccess(std::uint32_t access);

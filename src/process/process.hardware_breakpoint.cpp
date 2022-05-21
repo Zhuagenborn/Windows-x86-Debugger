@@ -33,7 +33,7 @@ std::optional<HardwareBreakpoint> Process::FindHardwareBreakpoint(
 
 bool Process::FindFreeHardwareBreakpointSlot(
     HardwareBreakpointSlot& slot) const noexcept {
-    for (auto i = 0; i != HardwareBreakpointSlotCount; ++i) {
+    for (auto i = 0; i != hardware_breakpoint_slot_count; ++i) {
         slot = static_cast<HardwareBreakpointSlot>(i);
         if (!hardware_breakpoint_slots_.at(slot)) {
             return true;

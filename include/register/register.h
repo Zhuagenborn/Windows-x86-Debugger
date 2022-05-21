@@ -44,11 +44,11 @@ class Registers;
  */
 class Register {
 public:
-    Register(Registers& registers, const RegisterIndex index) noexcept;
+    Register(Registers& registers, RegisterIndex index) noexcept;
 
     virtual ~Register() noexcept = default;
 
-    Register& operator=(const std::uintptr_t value) noexcept;
+    Register& operator=(std::uintptr_t value) noexcept;
 
     Register& operator++() noexcept;
 
@@ -58,14 +58,14 @@ public:
 
     Register operator--(int) noexcept;
 
-    Register& operator+=(const std::uintptr_t value) noexcept;
+    Register& operator+=(std::uintptr_t value) noexcept;
 
-    Register& operator-=(const std::uintptr_t value) noexcept;
+    Register& operator-=(std::uintptr_t value) noexcept;
 
     /**
      * Set the register value.
      */
-    void Set(const std::uintptr_t value) noexcept;
+    void Set(std::uintptr_t value) noexcept;
 
     /**
      * Reset the register value to zero.
@@ -78,7 +78,7 @@ public:
     std::uintptr_t Get() const noexcept;
 
 protected:
-    const RegisterIndex index_;
+    RegisterIndex index_;
 
     Registers& registers_;
 };
@@ -126,11 +126,11 @@ public:
     bool DF() const noexcept;
     bool OF() const noexcept;
 
-    void Set(const Flag flag) noexcept;
+    void Set(Flag flag) noexcept;
 
-    void Reset(const Flag flag) noexcept;
+    void Reset(Flag flag) noexcept;
 
-    bool Get(const Flag flag) const noexcept;
+    bool Get(Flag flag) const noexcept;
 
 private:
     struct Flags {
@@ -149,21 +149,21 @@ private:
         std::uintptr_t reserve3 : 20;
     };
 
-    void SetCF(const bool set) noexcept;
-    void SetPF(const bool set) noexcept;
-    void SetAF(const bool set) noexcept;
-    void SetZF(const bool set) noexcept;
-    void SetSF(const bool set) noexcept;
-    void SetTF(const bool set) noexcept;
-    void SetIF(const bool set) noexcept;
-    void SetDF(const bool set) noexcept;
-    void SetOF(const bool set) noexcept;
+    void SetCF(bool set) noexcept;
+    void SetPF(bool set) noexcept;
+    void SetAF(bool set) noexcept;
+    void SetZF(bool set) noexcept;
+    void SetSF(bool set) noexcept;
+    void SetTF(bool set) noexcept;
+    void SetIF(bool set) noexcept;
+    void SetDF(bool set) noexcept;
+    void SetOF(bool set) noexcept;
 
-    void Set(const Flag flag, const bool set) noexcept;
+    void Set(Flag flag, bool set) noexcept;
 };
 
 /**
- * A debug status register (`DR6`) controller, providing interfaces to set debug status.
+ * A debug status register @p DR6 controller, providing interfaces to set debug status.
  */
 class DebugStatusRegister : public Register {
 public:
@@ -197,14 +197,14 @@ private:
         std::uintptr_t reserve1 : 16;
     };
 
-    void SetB0(const bool set) noexcept;
-    void SetB1(const bool set) noexcept;
-    void SetB2(const bool set) noexcept;
-    void SetB3(const bool set) noexcept;
+    void SetB0(bool set) noexcept;
+    void SetB1(bool set) noexcept;
+    void SetB2(bool set) noexcept;
+    void SetB3(bool set) noexcept;
 };
 
 /**
- * A debug control register (`DR7`) controller, providing interfaces to control debugging.
+ * A debug control register @p DR7 controller, providing interfaces to control debugging.
  */
 class DebugControlRegister : public Register {
 public:
@@ -225,20 +225,20 @@ public:
     bool L2() const noexcept;
     bool L3() const noexcept;
 
-    void SetRW0(const std::uintptr_t value) noexcept;
-    void SetRW1(const std::uintptr_t value) noexcept;
-    void SetRW2(const std::uintptr_t value) noexcept;
-    void SetRW3(const std::uintptr_t value) noexcept;
+    void SetRW0(std::uintptr_t value) noexcept;
+    void SetRW1(std::uintptr_t value) noexcept;
+    void SetRW2(std::uintptr_t value) noexcept;
+    void SetRW3(std::uintptr_t value) noexcept;
 
     std::uintptr_t RW0() const noexcept;
     std::uintptr_t RW1() const noexcept;
     std::uintptr_t RW2() const noexcept;
     std::uintptr_t RW3() const noexcept;
 
-    void SetLEN0(const std::uintptr_t value) noexcept;
-    void SetLEN1(const std::uintptr_t value) noexcept;
-    void SetLEN2(const std::uintptr_t value) noexcept;
-    void SetLEN3(const std::uintptr_t value) noexcept;
+    void SetLEN0(std::uintptr_t value) noexcept;
+    void SetLEN1(std::uintptr_t value) noexcept;
+    void SetLEN2(std::uintptr_t value) noexcept;
+    void SetLEN3(std::uintptr_t value) noexcept;
 
     std::uintptr_t LEN0() const noexcept;
     std::uintptr_t LEN1() const noexcept;
@@ -270,8 +270,8 @@ private:
         std::uintptr_t LEN3 : 2;
     };
 
-    void SetL0(const bool set) noexcept;
-    void SetL1(const bool set) noexcept;
-    void SetL2(const bool set) noexcept;
-    void SetL3(const bool set) noexcept;
+    void SetL0(bool set) noexcept;
+    void SetL1(bool set) noexcept;
+    void SetL2(bool set) noexcept;
+    void SetL3(bool set) noexcept;
 };

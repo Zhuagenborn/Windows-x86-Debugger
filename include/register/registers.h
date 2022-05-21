@@ -51,8 +51,7 @@ public:
     /**
      * Get register values from a thread.
      */
-    Registers(const HANDLE thread,
-              const std::uint32_t context_flags = CONTEXT_ALL);
+    Registers(HANDLE thread, std::uint32_t context_flags = CONTEXT_ALL);
 
     /**
      * Set register values to the thread.
@@ -65,17 +64,17 @@ public:
 
     HANDLE Thread() const noexcept;
 
-    void Set(const RegisterIndex index, const std::uintptr_t value) noexcept;
+    void Set(RegisterIndex index, std::uintptr_t value) noexcept;
 
-    void Reset(const RegisterIndex index) noexcept;
+    void Reset(RegisterIndex index) noexcept;
 
-    std::uintptr_t Get(const RegisterIndex index) const noexcept;
+    std::uintptr_t Get(RegisterIndex index) const noexcept;
 
 private:
-    const HANDLE thread_;
+    HANDLE thread_;
 
     //! Original values.
-    const CONTEXT original_context_{};
+    CONTEXT original_context_{};
 
     //! Modified values.
     CONTEXT context_{};

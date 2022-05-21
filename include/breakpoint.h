@@ -27,22 +27,22 @@ enum class BreakpointType { Software, Hardware, Memory };
  * Basic breakpoint data.
  */
 struct Breakpoint {
-    Breakpoint(const std::uintptr_t address, const BreakpointType type,
-               const bool single_shoot) noexcept;
+    Breakpoint(std::uintptr_t address, BreakpointType type,
+               bool single_shoot) noexcept;
 
     virtual ~Breakpoint() noexcept = default;
 
-    const std::uintptr_t address;
+    std::uintptr_t address;
 
-    const BreakpointType type;
+    BreakpointType type;
 
     //! Whether this is a one-time breakpoint.
     bool single_shoot{ false };
 };
 
 
-//! The number of hardware breakpoint slots (from `DR0` to `DR3`).
-constexpr std::size_t HardwareBreakpointSlotCount = 4;
+//! The number of hardware breakpoint slots, from @p DR0 to @p DR3.
+constexpr std::size_t hardware_breakpoint_slot_count = 4;
 
 enum class HardwareBreakpointSlot { DR0 = 0, DR1 = 1, DR2 = 2, DR3 = 3 };
 
@@ -59,13 +59,11 @@ enum class HardwareBreakpointSize : std::uint32_t {
 };
 
 struct HardwareBreakpoint : public Breakpoint {
-    HardwareBreakpoint(const std::uintptr_t address,
-                       const HardwareBreakpointSlot slot,
-                       const HardwareBreakpointType access,
-                       const HardwareBreakpointSize size,
-                       const bool single_shoot) noexcept;
+    HardwareBreakpoint(std::uintptr_t address, HardwareBreakpointSlot slot,
+                       HardwareBreakpointType access,
+                       HardwareBreakpointSize size, bool single_shoot) noexcept;
 
-    const HardwareBreakpointSlot slot;
+    HardwareBreakpointSlot slot;
 
     HardwareBreakpointType access;
 
@@ -74,14 +72,13 @@ struct HardwareBreakpoint : public Breakpoint {
 
 
 //! The machine code for `INT 3` instruction.
-constexpr std::byte Int3 = std::byte{ 0xCC };
+constexpr std::byte int_3 = std::byte{ 0xCC };
 
 struct SoftwareBreakpoint : public Breakpoint {
-    SoftwareBreakpoint(const std::uintptr_t address,
-                       const std::byte original_byte,
-                       const bool single_shoot) noexcept;
+    SoftwareBreakpoint(std::uintptr_t address, std::byte original_byte,
+                       bool single_shoot) noexcept;
 
-    const std::byte original_byte;
+    std::byte original_byte;
 };
 
 

@@ -66,7 +66,7 @@ std::vector<std::byte> Process::ReadMemorySafe(const std::uintptr_t address,
         if (breakpoint.type == BreakpointType::Software
             && address <= breakpoint.address && breakpoint.address < end) {
             const auto offset = breakpoint.address - address;
-            assert(data[offset] == Int3);
+            assert(data[offset] == int_3);
 
             data[offset] = breakpoint.original_byte;
         }

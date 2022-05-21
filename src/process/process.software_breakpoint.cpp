@@ -59,7 +59,7 @@ void Process::SetInt3(const std::uintptr_t address,
         *original_byte = ReadMemoryUnsafe(address, sizeof(std::byte))[0];
     }
 
-    WriteMemoryUnsafe(address, std::initializer_list{ Int3 });
+    WriteMemoryUnsafe(address, std::initializer_list{ int_3 });
 }
 
 void Process::DeleteInt3(const std::uintptr_t address,
