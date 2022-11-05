@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21.0)
 cmake_policy(SET CMP0091 NEW)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-project(Tiny-Windows-x86-Debugger LANGUAGES CXX)
+project(Windows-x86-Debugger LANGUAGES CXX)
 
 if((NOT CMAKE_SYSTEM_NAME STREQUAL "Windows") OR (NOT CMAKE_SIZEOF_VOID_P EQUAL 4))
     message(FATAL_ERROR "Must configuring on/for Windows 32-bit")

@@ -1,4 +1,4 @@
-# Tiny Windows x86 Debugger
+# Windows x86 Debugger
 
 ![C++](docs/badges/C++.svg)
 [![CMake](docs/badges/Made-with-CMake.svg)](https://cmake.org)
