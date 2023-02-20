@@ -1,4 +1,4 @@
-# Windows x86 Debugger
+# *Windows* x86 Debugger
 
 ![C++](docs/badges/C++.svg)
 [![CMake](docs/badges/Made-with-CMake.svg)](https://cmake.org)
@@ -10,7 +10,7 @@
 
 ![Cover](Cover.png)
 
-A tiny **Windows x86** debugging framework written in *C++20* that supports software breakpoints and hardware breakpoints. It can be used to create custom debuggers. Some design patterns came from [*GleeBug*](https://github.com/x64dbg/GleeBug).
+A tiny ***Windows x86*** debugging framework written in *C++20* that supports software breakpoints and hardware breakpoints. It can be used to create custom debuggers. Some design patterns came from [*GleeBug*](https://github.com/x64dbg/GleeBug).
 
 ## Getting Started
 
@@ -213,19 +213,3 @@ Debugger o-- Process
 ## License
 
 Distributed under the *MIT License*. See `LICENSE` for more information.
-
-## Contact
-
-- ***Chen Zhenshuo***
-
-  > ***GitHub***: https://github.com/czs108
-  >
-  > ***E-Mail***: chenzs108@outlook.com
-  >
-  > ***WeChat***: chenzs108
-
-- ***Liu Guowen***
-
-  > ***GitHub***: https://github.com/lgw1995
-  >
-  > ***E-Mail***: liu.guowen@outlook.com
