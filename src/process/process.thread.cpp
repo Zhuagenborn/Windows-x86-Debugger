@@ -4,7 +4,7 @@
 
 
 OptionalThread Process::FindThread(const std::uint32_t id) const noexcept {
-    const auto found = threads_.find(id);
+    const auto found{ threads_.find(id) };
     return found != threads_.cend()
                ? OptionalThread{ const_cast<Thread&>(found->second) }
                : std::nullopt;

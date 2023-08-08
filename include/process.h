@@ -276,7 +276,7 @@ public:
     /**
      * @brief Execute and clear a breakpoint's callback.
      *
-     * @param breakpoint    The breakpoint key..
+     * @param breakpoint    The breakpoint key.
      */
     void ExecuteBreakpointCallback(BreakpointKey breakpoint);
 

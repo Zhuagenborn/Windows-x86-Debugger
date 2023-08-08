@@ -19,7 +19,7 @@
 #include <utility>
 
 
-constexpr std::size_t memory_page_size = 0x1000;
+constexpr std::size_t memory_page_size{ 0x1000 };
 
 enum class MemoryType {
     Access = 0B0001,

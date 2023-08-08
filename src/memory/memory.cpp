@@ -4,8 +4,8 @@
 
 
 std::uint32_t RemoveWriteAccess(const std::uint32_t access) {
-    const std::uint32_t low = access & 0xFF;
-    const std::uint32_t high = access & 0xFFFFFF00;
+    const std::uint32_t low{ access & 0xFF };
+    const std::uint32_t high{ access & 0xFFFFFF00 };
     switch (low) {
         case PAGE_EXECUTE: {
             return high | PAGE_READONLY;
@@ -22,8 +22,8 @@ std::uint32_t RemoveWriteAccess(const std::uint32_t access) {
 }
 
 std::uint32_t RemoveExecuteAccess(const std::uint32_t access) {
-    const std::uint32_t low = access & 0xFF;
-    const std::uint32_t high = access & 0xFFFFFF00;
+    const std::uint32_t low{ access & 0xFF };
+    const std::uint32_t high{ access & 0xFFFFFF00 };
     switch (low) {
         case PAGE_READWRITE:
         case PAGE_EXECUTE_READWRITE: {

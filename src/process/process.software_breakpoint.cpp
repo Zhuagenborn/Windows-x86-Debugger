@@ -29,9 +29,9 @@ void Process::SetSoftwareBreakpoint(const std::uintptr_t address,
 }
 
 bool Process::DeleteSoftwareBreakpoint(const std::uintptr_t address) {
-    if (const auto found = software_breakpoints_.find(address);
+    if (const auto found{ software_breakpoints_.find(address) };
         found != software_breakpoints_.cend()) {
-        const auto& breakpoint = found->second;
+        const auto& breakpoint{ found->second };
 
         DeleteInt3(breakpoint.address, breakpoint.original_byte);
 
@@ -47,7 +47,7 @@ bool Process::DeleteSoftwareBreakpoint(const std::uintptr_t address) {
 
 std::optional<SoftwareBreakpoint> Process::FindSoftwareBreakpoint(
     const std::uintptr_t address) const noexcept {
-    const auto found = software_breakpoints_.find(address);
+    const auto found{ software_breakpoints_.find(address) };
     return found != software_breakpoints_.cend()
                ? std::make_optional<SoftwareBreakpoint>(found->second)
                : std::nullopt;

@@ -42,7 +42,7 @@ struct Breakpoint {
 
 
 //! The number of hardware breakpoint slots, from @p DR0 to @p DR3.
-constexpr std::size_t hardware_breakpoint_slot_count = 4;
+constexpr std::size_t hardware_breakpoint_slot_count{ 4 };
 
 enum class HardwareBreakpointSlot { DR0 = 0, DR1 = 1, DR2 = 2, DR3 = 3 };
 
@@ -72,7 +72,7 @@ struct HardwareBreakpoint : public Breakpoint {
 
 
 //! The machine code for `INT 3` instruction.
-constexpr std::byte int_3 = std::byte{ 0xCC };
+constexpr std::byte int_3{ 0xCC };
 
 struct SoftwareBreakpoint : public Breakpoint {
     SoftwareBreakpoint(std::uintptr_t address, std::byte original_byte,

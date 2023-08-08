@@ -6,14 +6,14 @@
 
 
 bool Process::DeleteHardwareBreakpoint(const std::uintptr_t address) {
-    const auto found = hardware_breakpoints_.find(address);
+    const auto found{ hardware_breakpoints_.find(address) };
     if (found == hardware_breakpoints_.cend()) {
         return false;
     }
 
-    const auto& breakpoint = found->second;
+    const auto& breakpoint{ found->second };
     std::ranges::for_each(threads_, [&breakpoint](auto& pair) {
-        auto& [_, thread] = pair;
+        auto& [_, thread]{ pair };
         thread.DeleteHardwareBreakpoint(breakpoint.slot);
     });
 
@@ -25,7 +25,7 @@ bool Process::DeleteHardwareBreakpoint(const std::uintptr_t address) {
 
 std::optional<HardwareBreakpoint> Process::FindHardwareBreakpoint(
     const std::uintptr_t address) const noexcept {
-    const auto found = hardware_breakpoints_.find(address);
+    const auto found{ hardware_breakpoints_.find(address) };
     return found != hardware_breakpoints_.cend()
                ? std::make_optional<HardwareBreakpoint>(found->second)
                : std::nullopt;
@@ -33,7 +33,7 @@ std::optional<HardwareBreakpoint> Process::FindHardwareBreakpoint(
 
 bool Process::FindFreeHardwareBreakpointSlot(
     HardwareBreakpointSlot& slot) const noexcept {
-    for (auto i = 0; i != hardware_breakpoint_slot_count; ++i) {
+    for (auto i{ 0 }; i != hardware_breakpoint_slot_count; ++i) {
         slot = static_cast<HardwareBreakpointSlot>(i);
         if (!hardware_breakpoint_slots_.at(slot)) {
             return true;

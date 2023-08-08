@@ -13,8 +13,8 @@ void Debugger::OnException(const EXCEPTION_DEBUG_INFO& details) {
                   { STATUS_SINGLE_STEP, &Debugger::OnSingleStep },
                   { STATUS_ACCESS_VIOLATION, &Debugger::OnAccessViolation } };
 
-    const auto& record = details.ExceptionRecord;
-    const auto first_chance = details.dwFirstChance == 1;
+    const auto& record{ details.ExceptionRecord };
+    const auto first_chance{ details.dwFirstChance == 1 };
 
     cbPreException(record, first_chance);
 
@@ -30,7 +30,7 @@ void Debugger::OnException(const EXCEPTION_DEBUG_INFO& details) {
 
 void Debugger::OnSingleStep(const EXCEPTION_RECORD& record,
                             const bool first_chance) {
-    auto& thread = DebuggedThread();
+    auto& thread{ DebuggedThread() };
 
     if (thread.InternalStepping()) {
         thread.ResetInternalStepping();
@@ -55,11 +55,11 @@ void Debugger::OnSingleStep(const EXCEPTION_RECORD& record,
 
 void Debugger::OnBreakpoint(const EXCEPTION_RECORD& record,
                             const bool first_chance) {
-    auto& process = DebuggedProcess();
-    auto& thread = DebuggedThread();
+    auto& process{ DebuggedProcess() };
+    auto& thread{ DebuggedThread() };
 
-    const auto found = process.FindSoftwareBreakpoint(
-        reinterpret_cast<std::uintptr_t>(record.ExceptionAddress));
+    const auto found{ process.FindSoftwareBreakpoint(
+        reinterpret_cast<std::uintptr_t>(record.ExceptionAddress)) };
 
     if (!found && !process.HasHitSystemBreakpoint()) {
         process.HitSystemBreakpoint();
@@ -68,7 +68,7 @@ void Debugger::OnBreakpoint(const EXCEPTION_RECORD& record,
         cbSystemBreakpoint(process);
 
     } else {
-        const auto& breakpoint = *found;
+        const auto& breakpoint{ *found };
         Registers(thread.Handle(), CONTEXT_CONTROL).EIP.Set(breakpoint.address);
         process.DeleteInt3(breakpoint.address, breakpoint.original_byte);
         continue_status_ = DBG_CONTINUE;
@@ -99,11 +99,11 @@ void Debugger::OnAccessViolation(const EXCEPTION_RECORD& record,
                                  const bool first_chance) {}
 
 void Debugger::OnHardwareBreakpoint(const std::uintptr_t address) {
-    auto& process = DebuggedProcess();
-    auto& thread = DebuggedThread();
+    auto& process{ DebuggedProcess() };
+    auto& thread{ DebuggedThread() };
 
     Registers registers(thread.Handle(), CONTEXT_DEBUG_REGISTERS);
-    const auto& dr6 = registers.DR6;
+    const auto& dr6{ registers.DR6 };
     HardwareBreakpointSlot slot{};
     if (address == registers.DR0.Get() || dr6.B0()) {
         slot = HardwareBreakpointSlot::DR0;
@@ -117,10 +117,10 @@ void Debugger::OnHardwareBreakpoint(const std::uintptr_t address) {
         return;
     }
 
-    const auto found = process.FindHardwareBreakpoint(address);
+    const auto found{ process.FindHardwareBreakpoint(address) };
     assert(found);
 
-    const auto& breakpoint = *found;
+    const auto& breakpoint{ *found };
     assert(breakpoint.slot == slot);
 
     continue_status_ = DBG_CONTINUE;

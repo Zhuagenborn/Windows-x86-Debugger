@@ -49,14 +49,14 @@ CREATE_PROCESS_DEBUG_INFO Process::CreateInfo() const noexcept {
 
 void Process::Suspend() const {
     std::ranges::for_each(threads_, [](auto& pair) {
-        auto& [_, thread] = pair;
+        auto& [_, thread]{ pair };
         thread.Suspend();
     });
 }
 
 void Process::Resume() const {
     std::ranges::for_each(threads_, [](auto& pair) {
-        auto& [_, thread] = pair;
+        auto& [_, thread]{ pair };
         thread.Resume();
     });
 }
@@ -87,13 +87,13 @@ void Process::HitSystemBreakpoint() noexcept {
 }
 
 void Process::ExecuteBreakpointCallback(const BreakpointKey key) {
-    const auto callback_found = breakpoint_callbacks_.find(key);
+    const auto callback_found{ breakpoint_callbacks_.find(key) };
     if (callback_found != breakpoint_callbacks_.cend()) {
-        const auto [type, address] = key;
+        const auto [type, address]{ key };
         switch (type) {
             case BreakpointType::Software: {
-                const auto breakpoint_found =
-                    software_breakpoints_.find(address);
+                const auto breakpoint_found{ software_breakpoints_.find(
+                    address) };
                 if (breakpoint_found != software_breakpoints_.cend()) {
                     callback_found->second(breakpoint_found->second);
                 }
@@ -101,8 +101,8 @@ void Process::ExecuteBreakpointCallback(const BreakpointKey key) {
                 break;
             }
             case BreakpointType::Hardware: {
-                const auto breakpoint_found =
-                    hardware_breakpoints_.find(address);
+                const auto breakpoint_found{ hardware_breakpoints_.find(
+                    address) };
                 if (breakpoint_found != hardware_breakpoints_.cend()) {
                     callback_found->second(breakpoint_found->second);
                 }

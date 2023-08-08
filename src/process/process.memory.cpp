@@ -23,7 +23,7 @@ std::vector<std::byte> Process::WriteMemory(
 
 std::vector<std::byte> Process::WriteMemorySafe(
     const std::uintptr_t address, const std::span<const std::byte> data) const {
-    const auto end = address + data.size();
+    const auto end{ address + data.size() };
     for (const auto& [_, breakpoint] : software_breakpoints_) {
         if (breakpoint.type == BreakpointType::Software
             && address <= breakpoint.address && breakpoint.address < end) {
@@ -59,13 +59,13 @@ std::vector<std::byte> Process::ReadMemory(const std::uintptr_t address,
 
 std::vector<std::byte> Process::ReadMemorySafe(const std::uintptr_t address,
                                                const std::size_t size) const {
-    auto data = ReadMemoryUnsafe(address, size);
+    auto data{ ReadMemoryUnsafe(address, size) };
 
-    const auto end = address + size;
+    const auto end{ address + size };
     for (const auto& [_, breakpoint] : software_breakpoints_) {
         if (breakpoint.type == BreakpointType::Software
             && address <= breakpoint.address && breakpoint.address < end) {
-            const auto offset = breakpoint.address - address;
+            const auto offset{ breakpoint.address - address };
             assert(data[offset] == int_3);
 
             data[offset] = breakpoint.original_byte;

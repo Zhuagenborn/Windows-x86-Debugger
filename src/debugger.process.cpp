@@ -59,7 +59,7 @@ bool Debugger::RemoveProcess(const std::uint32_t id) noexcept {
 }
 
 OptionalProcess Debugger::FindProcess(const std::uint32_t id) const noexcept {
-    const auto found = processes_.find(id);
+    const auto found{ processes_.find(id) };
     return found != processes_.cend()
                ? OptionalProcess{ const_cast<Process&>(found->second) }
                : std::nullopt;
