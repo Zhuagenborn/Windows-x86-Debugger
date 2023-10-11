@@ -71,7 +71,7 @@ struct HardwareBreakpoint : public Breakpoint {
 };
 
 
-//! The machine code for `INT 3` instruction.
+//! The machine code for `INT3` instruction.
 constexpr std::byte int_3{ 0xCC };
 
 struct SoftwareBreakpoint : public Breakpoint {

@@ -257,7 +257,7 @@ public:
         std::uintptr_t address) const noexcept;
 
     /**
-     * @brief Set `INT 3` instruction.
+     * @brief Set `INT3` instruction.
      *
      * @param address               The memory address.
      * @param[out] original_byte    The original byte.
@@ -266,7 +266,7 @@ public:
                  std::byte* original_byte = nullptr) const;
 
     /**
-     * @brief Delete `INT 3` instruction.
+     * @brief Delete `INT3` instruction.
      *
      * @param address       The memory address.
      * @param original_byte The original byte.
