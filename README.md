@@ -66,107 +66,108 @@ Code comments follow [*Doxygen*](https://www.doxygen.nl) specification.
 ```mermaid
 classDiagram
 
-class RegisterIndex {
-    <<enumeration>>
-    EAX
-    EBX
-    ECX
-    EDX
-}
+namespace register {
 
-class Register {
-    Set(int)
-    Reset()
-    Get() int
+    class RegisterIndex {
+        <<enumeration>>
+        EAX
+        EBX
+        ECX
+        EDX
+    }
+
+    class Register {
+        Set(int)
+        Reset()
+        Get() int
+    }
+
+    class Flag {
+        <<enumeration>>
+        CF
+        AF
+        PF
+        ZF
+    }
+
+    class FlagRegister {
+        SetCF()
+        ResetCF()
+        CF() bool
+    }
+
+    class DebugStatusRegister {
+        SetB0()
+        ResetB0()
+        B0() bool
+    }
+
+    class DebugControlRegister {
+        SetL0()
+        ResetL0()
+        L0() bool
+        SetRW0(val)
+        RW0() int
+    }
+
+    class Registers {
+        Register EAX
+        FlagRegister EFLAGS
+        DebugStatusRegister DR6
+        DebugControlRegister DR7
+    }
 }
 
 Register --> RegisterIndex
-
-class Flag {
-    <<enumeration>>
-    CF
-    AF
-    PF
-    ZF
-}
-
-class FlagRegister {
-    SetCF()
-    ResetCF()
-    CF() bool
-}
-
 Register <|-- FlagRegister
 FlagRegister ..> Flag
-
-class DebugStatusRegister {
-    SetB0()
-    ResetB0()
-    B0() bool
-}
-
 Register <|-- DebugStatusRegister
-
-class DebugControlRegister {
-    SetL0()
-    ResetL0()
-    L0() bool
-    SetRW0(val)
-    RW0() int
-}
-
 Register <|-- DebugControlRegister
-
-class Registers {
-    Register EAX
-    FlagRegister EFLAGS
-    DebugStatusRegister DR6
-    DebugControlRegister DR7
-}
-
 Registers o-- Register
 
-class Breakpoint {
-    int address
-}
+namespace breakpoint {
 
-class HardwareBreakpointSlot {
-    <<enumeration>>
-    DR0
-    DR1
-    DR2
-    DR3
-}
+    class Breakpoint {
+        int address
+    }
 
-class HardwareBreakpointType {
-    <<enumeration>>
-    Execute
-    Write
-    ReadWrite
-}
+    class HardwareBreakpointSlot {
+        <<enumeration>>
+        DR0
+        DR1
+        DR2
+        DR3
+    }
 
-class HardwareBreakpointSize {
-    <<enumeration>>
-    Byte
-    Word
-    Dword
-}
+    class HardwareBreakpointType {
+        <<enumeration>>
+        Execute
+        Write
+        ReadWrite
+    }
 
-class HardwareBreakpoint {
-    HardwareBreakpointSlot slot
-    HardwareBreakpointType access
-    HardwareBreakpointSize size
+    class HardwareBreakpointSize {
+        <<enumeration>>
+        Byte
+        Word
+        Dword
+    }
+
+    class HardwareBreakpoint {
+        HardwareBreakpointSlot slot
+        HardwareBreakpointType access
+        HardwareBreakpointSize size
+    }
+
+    class SoftwareBreakpoint {
+        byte origin
+    }
 }
 
 Breakpoint <|-- HardwareBreakpoint
 HardwareBreakpoint --> HardwareBreakpointSlot
 HardwareBreakpoint --> HardwareBreakpointType
 HardwareBreakpoint --> HardwareBreakpointSize
-
-class SoftwareBreakpoint {
-    byte origin
-}
-
 Breakpoint <|-- SoftwareBreakpoint
 
 class Thread {
