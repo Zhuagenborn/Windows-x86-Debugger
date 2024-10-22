@@ -26,18 +26,16 @@
 //! The step callback.
 using StepCallback = std::function<void()>;
 
-/**
- * A thread.
- */
+//! A thread.
 class Thread {
 public:
     /**
      * @brief Create a thread.
      *
-     * @param handle        The thread handle.
-     * @param id            The thread ID.
-     * @param entry         The entry address.
-     * @param local_base    The memory address of local data.
+     * @param handle The thread handle.
+     * @param id The thread ID.
+     * @param entry The entry address.
+     * @param local_base The memory address of local data.
      */
     Thread(HANDLE handle, std::uint32_t id, std::uintptr_t entry,
            std::uintptr_t local_base) noexcept;
@@ -56,68 +54,46 @@ public:
 
     std::uintptr_t LocalBase() const noexcept;
 
-    /**
-     * Suspend the thread.
-     */
+    //! Suspend the thread.
     void Suspend() const;
 
-    /**
-     * Resume the thread.
-     */
+    //! Resume the thread.
     void Resume() const;
 
-    /**
-     * Step into.
-     */
+    //! Step into.
     void StepInto();
 
-    /**
-     * Step into and set a single step callback.
-     */
+    //! Step into and set a single step callback.
     void StepInto(StepCallback callback);
 
-    /**
-     * Whether the thread has set a single step.
-     */
+    //! Whether the thread has set a single step.
     bool SingleStepping() const noexcept;
 
-    /**
-     * Execute and clear single step callbacks.
-     */
+    //! Execute and clear single step callbacks.
     void ExecuteSingleStepCallbacks();
 
-    /**
-     * Clear the single step.
-     */
+    //! Clear the single step.
     void ResetSingleStepping() noexcept;
 
-    /**
-     * Perform an internal step.
-     */
+    //! Perform an internal step.
     void InternalStep(StepCallback callback);
 
-    /**
-     * Whether the thread has set an internal step.
-     */
+    //! Whether the thread has set an internal step.
     bool InternalStepping() const noexcept;
 
-    /**
-     * Clear the internal step.
-     */
+    //! Clear the internal step.
     void ResetInternalStepping() noexcept;
 
-    /**
-     * Execute and clear the internal step callback.
-     */
+    //! Execute and clear the internal step callback.
     void ExecuteInternalStepCallback();
 
     /**
      * @brief Set a hardware breakpoint.
      *
-     * @param address   The memory address.
-     * @param slot      The hardware breakpoint slot.
-     * @param type      The hardware breakpoint type.
-     * @param size      The hardware breakpoint size.
+     * @param address The memory address.
+     * @param slot The hardware breakpoint slot.
+     * @param type The hardware breakpoint type.
+     * @param size The hardware breakpoint size.
      */
     void SetHardwareBreakpoint(std::uintptr_t address,
                                HardwareBreakpointSlot slot,
@@ -127,7 +103,7 @@ public:
     /**
      * @brief Delete a hardware breakpoint.
      *
-     * @param slot  The hardware breakpoint slot.
+     * @param slot The hardware breakpoint slot.
      */
     void DeleteHardwareBreakpoint(HardwareBreakpointSlot slot) const;
 

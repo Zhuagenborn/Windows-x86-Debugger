@@ -28,18 +28,16 @@
 #include <unordered_map>
 #include <vector>
 
-/**
- * A process.
- */
+//! A process.
 class Process {
 public:
     /**
      * @brief Create a process.
      *
-     * @param handle        The process handle.
-     * @param id            The process ID.
-     * @param main_thread   The main thread.
-     * @param create_info   The creation information.
+     * @param handle The process handle.
+     * @param id The process ID.
+     * @param main_thread The main thread.
+     * @param create_info The creation information.
      */
     Process(HANDLE handle, std::uint32_t id, Thread&& main_thread,
             const CREATE_PROCESS_DEBUG_INFO& create_info) noexcept;
@@ -58,78 +56,60 @@ public:
 
     CREATE_PROCESS_DEBUG_INFO CreateInfo() const noexcept;
 
-    /**
-     * Suspend the process.
-     */
+    //! Suspend the process.
     void Suspend() const;
 
-    /**
-     * Resume the process.
-     */
+    //! Resume the process.
     void Resume() const;
 
     /**
      * @brief Find a thread.
      *
-     * @param id    The thread ID.
+     * @param id The thread ID.
      */
     OptionalThread FindThread(std::uint32_t id) const noexcept;
 
-    /**
-     * Create a thread.
-     */
+    //! Create a thread.
     void NewThread(Thread&& thread) noexcept;
 
     /**
      * @brief Remove a thread.
      *
-     * @param id    The thread ID.
+     * @param id The thread ID.
      */
     bool RemoveThread(std::uint32_t id) noexcept;
 
-    /**
-     * Get the debugged thread.
-     */
+    //! Get the debugged thread.
     OptionalThread DebuggedThread() const noexcept;
 
     /**
      * @brief Set the debugged thread and return it.
      *
-     * @param id    The thread ID.
+     * @param id The thread ID.
      */
     OptionalThread SetDebuggedThread(std::uint32_t id) noexcept;
 
-    /**
-     * Reset the debugged thread to null.
-     */
+    //! Reset the debugged thread to null.
     void ResetDebuggedThread() noexcept;
 
-    /**
-     * Whether a thread is being debugged.
-     */
+    //! Whether a thread is being debugged.
     bool HasDebuggedThread() const noexcept;
 
-    /**
-     * Whether the process has hit the system breakpoint.
-     */
+    //! Whether the process has hit the system breakpoint.
     bool HasHitSystemBreakpoint() const noexcept;
 
-    /**
-     * Hit the system breakpoint.
-     */
+    //! Hit the system breakpoint.
     void HitSystemBreakpoint() noexcept;
 
-    /**
-     * Whether a memory address is valid.
-     */
+    //! Whether a memory address is valid.
     bool ValidMemory(std::uintptr_t address) const noexcept;
 
     /**
      * @brief Write data to a memory area.
      *
-     * @param address   The memory address.
-     * @param data      The data.
-     * @param safe      Safe or unsafe writting.
+     * @param address The memory address.
+     * @param data The data.
+     * @param safe Safe or unsafe writting.
      * @return Original memory data.
      */
     std::vector<std::byte> WriteMemory(std::uintptr_t address,
@@ -139,8 +119,8 @@ public:
     /**
      * @brief Safely write data to a memory area, filtering out breakpoint bytes.
      *
-     * @param address   The memory address.
-     * @param data      The data.
+     * @param address The memory address.
+     * @param data The data.
      * @return Original memory data.
      */
     std::vector<std::byte> WriteMemorySafe(
@@ -149,8 +129,8 @@ public:
     /**
      * @brief Unsafely write data to a memory area.
      *
-     * @param address   The memory address.
-     * @param data      The data.
+     * @param address The memory address.
+     * @param data The data.
      * @return Original memory data.
      */
     std::vector<std::byte> WriteMemoryUnsafe(
@@ -159,9 +139,9 @@ public:
     /**
      * @brief Read data from a memory area.
      *
-     * @param address   The memory address.
-     * @param size      The size to read.
-     * @param safe      Safe or unsafe reading.
+     * @param address The memory address.
+     * @param size The size to read.
+     * @param safe Safe or unsafe reading.
      * @return Memory data.
      */
     std::vector<std::byte> ReadMemory(std::uintptr_t address, std::size_t size,
@@ -170,8 +150,8 @@ public:
     /**
      * @brief Safely read data from a memory area, filtering out breakpoint bytes.
      *
-     * @param address   The memory address.
-     * @param size      The size to read.
+     * @param address The memory address.
+     * @param size The size to read.
      * @return Memory data.
      */
     std::vector<std::byte> ReadMemorySafe(std::uintptr_t address,
@@ -180,8 +160,8 @@ public:
     /**
      * @brief Unsafely read data from a memory area.
      *
-     * @param address   The memory address.
-     * @param size      The size to read.
+     * @param address The memory address.
+     * @param size The size to read.
      * @return Memory data.
      */
     std::vector<std::byte> ReadMemoryUnsafe(std::uintptr_t address,
@@ -199,12 +179,12 @@ public:
     /**
      * @brief Set a hardware breakpoint.
      *
-     * @param address       The memory address.
-     * @param slot          The hardware breakpoint slot.
-     * @param type          The hardware breakpoint type.
-     * @param size          The hardware breakpoint size.
-     * @param single_shoot  Whether to set a one-time breakpoint.
-     * @param callback      A callback function.
+     * @param address The memory address.
+     * @param slot The hardware breakpoint slot.
+     * @param type The hardware breakpoint type.
+     * @param size The hardware breakpoint size.
+     * @param single_shoot Whether to set a one-time breakpoint.
+     * @param callback A callback function.
      */
     void SetHardwareBreakpoint(std::uintptr_t address,
                                HardwareBreakpointSlot slot,
@@ -216,7 +196,7 @@ public:
     /**
      * @brief Delete a hardware breakpoint.
      *
-     * @param address   The memory address.
+     * @param address The memory address.
      * @return @p true if it succeeds, otherwise @p false.
      */
     bool DeleteHardwareBreakpoint(std::uintptr_t address);
@@ -224,7 +204,7 @@ public:
     /**
      * @brief Find a hardware breakpoint.
      *
-     * @param address   The memory address.
+     * @param address The memory address.
      */
     std::optional<HardwareBreakpoint> FindHardwareBreakpoint(
         std::uintptr_t address) const noexcept;
@@ -232,9 +212,9 @@ public:
     /**
      * @brief Set a software breakpoint.
      *
-     * @param address       The memory address.
-     * @param single_shoot  Whether to set a one-time breakpoint.
-     * @param callback      A callback function.
+     * @param address The memory address.
+     * @param single_shoot Whether to set a one-time breakpoint.
+     * @param callback A callback function.
      */
     void SetSoftwareBreakpoint(std::uintptr_t address,
                                bool single_shoot = false,
@@ -243,7 +223,7 @@ public:
     /**
      * @brief Delete a software breakpoint.
      *
-     * @param address   The memory address.
+     * @param address The memory address.
      * @return @p true if it succeeds, otherwise @p false.
      */
     bool DeleteSoftwareBreakpoint(std::uintptr_t address);
@@ -251,7 +231,7 @@ public:
     /**
      * @brief Find a software breakpoint.
      *
-     * @param address   The memory address.
+     * @param address The memory address.
      */
     std::optional<SoftwareBreakpoint> FindSoftwareBreakpoint(
         std::uintptr_t address) const noexcept;
@@ -259,8 +239,8 @@ public:
     /**
      * @brief Set `INT3` instruction.
      *
-     * @param address               The memory address.
-     * @param[out] original_byte    The original byte.
+     * @param address The memory address.
+     * @param[out] original_byte The original byte.
      */
     void SetInt3(std::uintptr_t address,
                  std::byte* original_byte = nullptr) const;
@@ -268,7 +248,7 @@ public:
     /**
      * @brief Delete `INT3` instruction.
      *
-     * @param address       The memory address.
+     * @param address The memory address.
      * @param original_byte The original byte.
      */
     void DeleteInt3(std::uintptr_t address, std::byte original_byte) const;
@@ -276,7 +256,7 @@ public:
     /**
      * @brief Execute and clear a breakpoint's callback.
      *
-     * @param breakpoint    The breakpoint key.
+     * @param breakpoint The breakpoint key.
      */
     void ExecuteBreakpointCallback(BreakpointKey breakpoint);
 

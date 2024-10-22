@@ -20,9 +20,7 @@
 
 #include <cstdint>
 
-/**
- * x86 32-bit registers.
- */
+//! x86 32-bit registers.
 class Registers final {
 public:
     Register EAX;
@@ -48,14 +46,10 @@ public:
     DebugStatusRegister DR6;
     DebugControlRegister DR7;
 
-    /**
-     * Get register values from a thread.
-     */
+    //! Get register values from a thread.
     Registers(HANDLE thread, std::uint32_t context_flags = CONTEXT_ALL);
 
-    /**
-     * Set register values to the thread.
-     */
+    //! Set register values to the thread.
     ~Registers();
 
     Registers(const Registers&) = delete;

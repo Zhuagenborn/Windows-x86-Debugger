@@ -23,9 +23,7 @@
 
 enum class BreakpointType { Software, Hardware, Memory };
 
-/**
- * Basic breakpoint data.
- */
+//! Basic breakpoint data.
 struct Breakpoint {
     Breakpoint(std::uintptr_t address, BreakpointType type,
                bool single_shoot) noexcept;

@@ -39,6 +39,7 @@ enum class RegisterIndex {
 class Registers;
 
 /**
+ * @brief
  * A basic register controller.
  * It's an interface for controlling a x86 register.
  */
@@ -62,19 +63,13 @@ public:
 
     Register& operator-=(std::uintptr_t value) noexcept;
 
-    /**
-     * Set the register value.
-     */
+    //! Set the register value.
     void Set(std::uintptr_t value) noexcept;
 
-    /**
-     * Reset the register value to zero.
-     */
+    //! Reset the register value to zero.
     void Reset() noexcept;
 
-    /**
-     * Get the register value.
-     */
+    //! Get the register value.
     std::uintptr_t Get() const noexcept;
 
 protected:
@@ -89,9 +84,7 @@ bool operator!=(const Register& register1, const Register& register2) noexcept;
 
 enum class Flag { CF, PF, AF, ZF, SF, TF, IF, DF, OF };
 
-/**
- * A FLAGS register controller, providing interfaces to set flags.
- */
+//! A @p FLAGS register controller, providing interfaces to set flags.
 class FlagRegister : public Register {
 public:
     FlagRegister(Registers& registers) noexcept;
@@ -162,9 +155,7 @@ private:
     void Set(Flag flag, bool set) noexcept;
 };
 
-/**
- * A debug status register @p DR6 controller, providing interfaces to set debug status.
- */
+//! A debug status register @p DR6 controller, providing interfaces to set debug status.
 class DebugStatusRegister : public Register {
 public:
     DebugStatusRegister(Registers& registers) noexcept;
@@ -203,9 +194,7 @@ private:
     void SetB3(bool set) noexcept;
 };
 
-/**
- * A debug control register @p DR7 controller, providing interfaces to control debugging.
- */
+//! A debug control register @p DR7 controller, providing interfaces to control debugging.
 class DebugControlRegister : public Register {
 public:
     DebugControlRegister(Registers& registers) noexcept;

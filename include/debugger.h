@@ -24,9 +24,7 @@
 #include <string_view>
 #include <unordered_map>
 
-/**
- * A basic debugger.
- */
+//! A basic debugger.
 class Debugger {
 public:
     Debugger() noexcept = default;
@@ -40,10 +38,10 @@ public:
     /**
      * @brief Create a process to debug.
      *
-     * @param file_path         The file path.
-     * @param cmd_line          The command line.
+     * @param file_path The file path.
+     * @param cmd_line The command line.
      * @param current_directory The current directory.
-     * @param start_suspended   Whether to suspend the process after creation.
+     * @param start_suspended Whether to suspend the process after creation.
      */
     void Create(std::wstring_view file_path, std::wstring_view cmd_line,
                 std::wstring_view current_directory, bool start_suspended);
@@ -51,29 +49,24 @@ public:
     /**
      * @brief Attach to a process to debug.
      *
-     * @param process_id    The process ID.
+     * @param process_id The process ID.
      */
     void Attach(std::uint32_t process_id);
 
-    /**
-     * Start the debug loop.
-     */
+    //! Start the debug loop.
     void Start();
 
-    /**
-     * Detach the process.
-     */
+    //! Detach the process.
     void UnsafeDetach();
 
     /**
+     * @brief
      * Detach the process.
      * The detach happens at the end of the debug loop.
      */
     void Detach();
 
-    /**
-     * Terminate the process.
-     */
+    //! Terminate the process.
     void Stop();
 
 protected:
@@ -130,61 +123,47 @@ protected:
 
     /*****************************************************/
 
-    /**
-     * Clear debug cache.
-     */
+    //! Clear debug cache.
     virtual void ClearCache() noexcept;
 
     /**
      * @brief Set the debugged process and thread.
      *
-     * @param process_id    The process ID.
-     * @param thread_id     The thread ID.
+     * @param process_id The process ID.
+     * @param thread_id The thread ID.
      */
     void SetDebuggedProcessThread(std::uint32_t process_id,
                                   std::uint32_t thread_id) noexcept;
 
-    /**
-     * Reset the debugged process and thread to null.
-     */
+    //! Reset the debugged process and thread to null.
     void ResetDebuggedProcessThread() noexcept;
 
-    /**
-     * Get the debugged process.
-     */
+    //! Get the debugged process.
     Process& DebuggedProcess() const noexcept;
 
-    /**
-     * Get the debugged thread.
-     */
+    //! Get the debugged thread.
     Thread& DebuggedThread() const noexcept;
 
-    /**
-     * Whether a process is being debugged.
-     */
+    //! Whether a process is being debugged.
     bool HasDebuggedProcess() const noexcept;
 
-    /**
-     * Whether a thread is being debugged.
-     */
+    //! Whether a thread is being debugged.
     bool HasDebuggedThread() const noexcept;
 
-    /**
-     * Create a process.
-     */
+    //! Create a process.
     void NewProcess(Process&& process) noexcept;
 
     /**
      * @brief Remove a process.
      *
-     * @param id    The process ID.
+     * @param id The process ID.
      */
     bool RemoveProcess(std::uint32_t id) noexcept;
 
     /**
      * @brief Find a process.
      *
-     * @param id    The process ID.
+     * @param id The process ID.
      */
     OptionalProcess FindProcess(std::uint32_t id) const noexcept;
 
