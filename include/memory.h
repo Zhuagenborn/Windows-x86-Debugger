@@ -31,20 +31,14 @@ enum class MemoryType {
 //! A memory range, including a start address and an end address.
 using MemoryRange = std::pair<std::uintptr_t, std::uintptr_t>;
 
-/**
- * Check if the first memory range comes before the second memory range.
- */
+//! Check if the first memory range comes before the second memory range.
 constexpr bool operator<(const MemoryRange& range1,
                          const MemoryRange& range2) noexcept {
     return range1.second < range2.first;
 }
 
-/**
- * Remove the write permission from memory protection.
- */
+//! Remove the write permission from memory protection.
 std::uint32_t RemoveWriteAccess(std::uint32_t access);
 
-/**
- * Remove the execute permission from memory protection.
- */
+//! Remove the execute permission from memory protection.
 std::uint32_t RemoveExecuteAccess(std::uint32_t access);

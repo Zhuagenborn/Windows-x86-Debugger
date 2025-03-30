@@ -10,7 +10,7 @@
 
 ![Cover](Cover.png)
 
-A tiny ***Windows x86*** debugging framework written in *C++20* that supports software breakpoints and hardware breakpoints. It can be used to create custom debuggers. Some design patterns came from [*GleeBug*](https://github.com/x64dbg/GleeBug).
+A simple ***Windows x86*** debugging framework written in *C++20* that supports software breakpoints and hardware breakpoints. It can be used to create custom debuggers. Some design patterns came from [*GleeBug*](https://github.com/x64dbg/GleeBug).
 
 ## Getting Started
 
